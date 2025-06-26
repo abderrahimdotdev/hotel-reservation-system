@@ -17,11 +17,11 @@ public class User {
         return this.balance;
     }
 
-    public void subtractAmountFromBalance(int amount) {
-        this.balance -= amount;
-    }
-
-    public void addAmountToBalance(int amount) {
-        this.balance += amount;
+    public void setBalance(int newBalance) {
+        if(newBalance < 0){
+            System.err.println("Balance cannot be negative.");
+            return;
+        }
+        this.balance = newBalance;
     }
 }

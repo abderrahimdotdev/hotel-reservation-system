@@ -47,7 +47,16 @@ public class Service {
     }
 
     public void setUser(int userId, int balance) {
-
+        
+        User user = findUserById(userId);
+        boolean userExists = users != null;
+        
+        if (!userExists){
+            users.add(new User(userId, balance));
+        }
+        else{
+            user.setBalance(balance);
+        }
     }
 
     public void printAllUsers() {
@@ -55,6 +64,10 @@ public class Service {
     }
 
     // -- Helping methods --
+
+    private User findUserById(int userId) {
+        return users.stream().filter(u -> u.getId() == userId).findFirst().orElse(null);
+    }
 
     private Room findRoomByNumber(int roomNumber) {
         return rooms.stream().filter(r -> r.getRoomNumber() == roomNumber).findFirst().orElse(null);

@@ -47,19 +47,27 @@ public class Service {
     }
 
     public void setUser(int userId, int balance) {
-        
+
         User user = findUserById(userId);
         boolean userExists = users != null;
-        
-        if (!userExists){
+
+        if (!userExists) {
             users.add(new User(userId, balance));
-        }
-        else{
+        } else {
             user.setBalance(balance);
         }
     }
 
     public void printAllUsers() {
+
+        printTitle("Users:");
+        printColumns("UserID", "Balance");
+        System.out.println();
+
+        for (int i = users.size() - 1; i >= 0; i--) {
+            User u = users.get(i);
+            printColumns("" + u.getId(), "" + u.getBalance());
+        }
 
     }
 
@@ -71,6 +79,19 @@ public class Service {
 
     private Room findRoomByNumber(int roomNumber) {
         return rooms.stream().filter(r -> r.getRoomNumber() == roomNumber).findFirst().orElse(null);
+    }
+
+    private void printTitle(String headline) {
+        System.out.println("=".repeat(headline.length()));
+        System.out.println(headline);
+        System.out.println("=".repeat(headline.length()));
+    }
+
+    private void printColumns(String... columns) {
+        for (String s : columns) {
+            System.out.printf("%-20s", s);
+        }
+        System.out.println();
     }
 
 }

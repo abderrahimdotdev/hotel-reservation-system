@@ -24,6 +24,18 @@ public class Service {
 
     public void setRoom(int roomNumber, RoomType roomType, int roomPricePerNight) {
 
+        // Checking if room already exists
+        Room room = findRoomByNumber(roomNumber);
+        boolean roomExists = room != null;
+
+        // If the room does not exist, we insert it
+        if (!roomExists) {
+            rooms.add(new Room(roomNumber, roomType, roomPricePerNight));
+        } else {
+            room.setRoomNumber(roomNumber);
+            room.setRoomType(roomType);
+            room.setPrice(roomPricePerNight);
+        }
     }
 
     public void bookRoom(int userId, int roomNumber, Date checkIn, Date checkOut) {
@@ -40,6 +52,12 @@ public class Service {
 
     public void printAllUsers() {
 
+    }
+
+    // -- Helping methods --
+
+    private Room findRoomByNumber(int roomNumber) {
+        return rooms.stream().filter(r -> r.getRoomNumber() == roomNumber).findFirst().orElse(null);
     }
 
 }

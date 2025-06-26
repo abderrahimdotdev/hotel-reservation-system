@@ -102,7 +102,7 @@ public class Service {
     public void setUser(int userId, int balance) {
 
         User user = findUserById(userId);
-        boolean userExists = users != null;
+        boolean userExists = user != null;
 
         if (!userExists) {
             users.add(new User(userId, balance));

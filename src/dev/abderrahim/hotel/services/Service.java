@@ -2,6 +2,7 @@ package dev.abderrahim.hotel.services;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -41,6 +42,34 @@ public class Service {
     }
 
     public void bookRoom(int userId, int roomNumber, Date checkIn, Date checkOut) {
+        
+        User user = findUserById(userId);
+        Room room = findRoomByNumber(roomNumber);
+        
+        if (user == null) {
+            System.err.printf("User with id %s does not exist.%n", userId);
+            return;
+        } else if (room == null) {
+            System.err.printf("Room number %s does not exist.%n", roomNumber);
+            return;
+        } else if (checkIn.after(checkOut)) {
+            System.err.println("Check-in date cannot be greater or equal than check-out date.");
+            return;
+        }
+        
+        long nights = ChronoUnit.DAYS.between(checkIn.toInstant(), checkOut.toInstant());
+        int totalPrice = (int) nights * room.getPrice();
+
+        if (totalPrice > user.getBalance()) {
+            System.err.printf("""
+                    The user does not have enough balance to book the room number %s for the specified period
+                    %n""", room.getRoomNumber());
+            return;
+        }
+        else{
+            bookings.addFirst(new Booking(user, room, checkIn, checkOut, totalPrice));
+            user.setBalance(user.getBalance() - totalPrice);
+        }
 
     }
 

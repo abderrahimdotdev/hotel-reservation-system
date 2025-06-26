@@ -1,5 +1,7 @@
 package dev.abderrahim.hotel.services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -43,6 +45,28 @@ public class Service {
     }
 
     public void printAll() {
+
+        printTitle("Rooms: ");
+        printColumns("RoomNumber", "RoomType", "PricePerNight");
+        System.out.println();
+
+        rooms.forEach(r -> {
+            printColumns("" + r.getRoomNumber(), "" + r.getType(), "" + r.getPrice());
+        });
+
+        printTitle("Bookings: ");
+        printColumns("UserID", "RoomNumber", "RoomType", "CheckIn", "CheckOut", "TotalPrice");
+        System.out.println();
+
+        DateFormat dtFormatter = SimpleDateFormat.getDateInstance();
+        bookings.forEach(bk -> {
+            printColumns("" + bk.user().getId(),
+                    "" + bk.room().getRoomNumber(),
+                    "" + bk.room().getType(),
+                    dtFormatter.format(bk.checkIn()),
+                    dtFormatter.format(bk.checkOut()),
+                    "" + bk.totalPrice());
+        });
 
     }
 

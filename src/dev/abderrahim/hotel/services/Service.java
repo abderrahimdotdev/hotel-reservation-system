@@ -2,6 +2,7 @@ package dev.abderrahim.hotel.services;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.SequencedCollection;
 
 import dev.abderrahim.hotel.entities.Booking;
@@ -10,9 +11,16 @@ import dev.abderrahim.hotel.entities.User;
 import dev.abderrahim.hotel.types.RoomType;
 
 public class Service {
+
     ArrayList<Room> rooms;
     ArrayList<User> users;
     SequencedCollection<Booking> bookings;
+
+    public Service() {
+        rooms = new ArrayList<>();
+        users = new ArrayList<>();
+        bookings = new LinkedList<>();
+    }
 
     public void setRoom(int roomNumber, RoomType roomType, int roomPricePerNight) {
 

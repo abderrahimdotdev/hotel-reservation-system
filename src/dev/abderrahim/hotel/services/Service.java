@@ -15,9 +15,9 @@ import dev.abderrahim.hotel.types.RoomType;
 
 public class Service {
 
-    ArrayList<Room> rooms;
-    ArrayList<User> users;
-    SequencedCollection<Booking> bookings;
+    private ArrayList<Room> rooms;
+    private ArrayList<User> users;
+    private SequencedCollection<Booking> bookings;
 
     public Service() {
         rooms = new ArrayList<>();

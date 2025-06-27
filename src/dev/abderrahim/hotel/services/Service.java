@@ -124,7 +124,7 @@ public class Service {
 
     }
 
-    // -- Helping methods --
+    // -- Helper methods --
 
     private User findUserById(int userId) {
         return users.stream().filter(u -> u.getId() == userId).findFirst().orElse(null);

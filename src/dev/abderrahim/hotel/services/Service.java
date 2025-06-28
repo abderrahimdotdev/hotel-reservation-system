@@ -64,7 +64,6 @@ public class Service {
             System.err.printf("""
                     The user does not have enough balance to book the room number %s for the specified period
                     %n""", room.getRoomNumber());
-            return;
         }
         else{
             bookings.addFirst(new Booking(user, room, checkIn, checkOut, totalPrice));
@@ -75,7 +74,7 @@ public class Service {
 
     public void printAll() {
 
-        printTitle("Rooms: ");
+        printTitle("Rooms:");
         printColumns("RoomNumber", "RoomType", "PricePerNight");
         System.out.println();
 
@@ -83,7 +82,7 @@ public class Service {
             printColumns("" + r.getRoomNumber(), "" + r.getType(), "" + r.getPrice());
         });
 
-        printTitle("Bookings: ");
+        printTitle("Bookings:");
         printColumns("UserID", "RoomNumber", "RoomType", "CheckIn", "CheckOut", "TotalPrice");
         System.out.println();
 

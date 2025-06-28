@@ -8,6 +8,10 @@ public class Room {
     private RoomType type;
     private int pricePerNight;
 
+    public Room(){
+        
+    }
+
     public Room(int roomNumber, RoomType type, int pricePerNight) {
         this.roomNumber = roomNumber;
         this.type = type;
@@ -32,7 +36,7 @@ public class Room {
 
     public void setRoomNumber(int newNumber) {
         if (newNumber < 0) {
-            System.err.println("Price cannot be negative.");
+            System.err.println("Room number cannot be negative.");
             return;
         }
         this.roomNumber = newNumber;

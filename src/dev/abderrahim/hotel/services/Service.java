@@ -78,9 +78,10 @@ public class Service {
         printColumns("RoomNumber", "RoomType", "PricePerNight");
         System.out.println();
 
-        rooms.forEach(r -> {
-            printColumns("" + r.getRoomNumber(), "" + r.getType(), "" + r.getPrice());
-        });
+        for(int i = rooms.size() - 1 ; i >=0 ; i--){
+            Room currentRoom = rooms.get(i);
+            printColumns("" + currentRoom.getRoomNumber(), "" + currentRoom.getType(), "" + currentRoom.getPrice());
+        }
 
         printTitle("Bookings:");
         printColumns("UserID", "RoomNumber", "RoomType", "CheckIn", "CheckOut", "TotalPrice");

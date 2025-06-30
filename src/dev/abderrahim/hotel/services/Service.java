@@ -56,6 +56,10 @@ public class Service {
             System.err.println("Check-in date cannot be greater or equal than check-out date.");
             return;
         }
+        else if (!isAvailable(room.getRoomNumber(),checkIn,checkOut)){
+            System.err.println("Room not available at the specified date.");
+            return;
+        }
         
         long nights = ChronoUnit.DAYS.between(checkIn.toInstant(), checkOut.toInstant());
         int totalPrice = (int) nights * room.getPrice();
@@ -139,7 +143,14 @@ public class Service {
         System.out.println(headline);
         System.out.println("=".repeat(headline.length()));
     }
-
+    private boolean isAvailable(int roomNumber, Date checkIn, Date checkOut){
+        return !bookings.stream().anyMatch(r -> {
+            boolean roomAlreadyReserved = (checkIn.equals(r.checkIn()) 
+                                        || (checkIn.after(r.checkIn())) && checkIn.before(r.checkOut()));
+            
+            return r.room().getRoomNumber() == roomNumber && roomAlreadyReserved;
+        });
+    }
     private void printColumns(String... columns) {
         for (String s : columns) {
             System.out.printf("%-20s", s);
